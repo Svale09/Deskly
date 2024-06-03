@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,32 +20,36 @@ import com.example.deskly.ui.theme.jomhuriaFontFamily
 fun LoginScreen(
     navController: NavController
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize()
-            .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        var inputEmail: String = ""
-        var inputPassword: String = ""
-        Text(
-            text = "Log In",
-            fontFamily = jomhuriaFontFamily,
-            fontSize = 60.sp,
-        )
-        CustomInputField(
-            label = "Email",
-            placeholder = "Enter your email",
-            value = inputEmail,
-            onValueChange = { newEmail -> inputEmail = newEmail },
-        )
+    var inputEmail: String = ""
+    var inputPassword: String = ""
 
-        CustomInputField(
-            label = "Password",
-            placeholder = "Input your password",
-            value = inputPassword,
-            onValueChange = { newPassword -> inputPassword = newPassword }
-        )
+    Scaffold { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Log In",
+                fontFamily = jomhuriaFontFamily,
+                fontSize = 60.sp,
+            )
+            CustomInputField(
+                label = "Email",
+                placeholder = "Enter your email",
+                value = inputEmail,
+                onValueChange = { newEmail -> inputEmail = newEmail },
+            )
+
+            CustomInputField(
+                label = "Password",
+                placeholder = "Input your password",
+                value = inputPassword,
+                onValueChange = { newPassword -> inputPassword = newPassword }
+            )
+        }
     }
 }
 
