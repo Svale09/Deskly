@@ -6,6 +6,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.deskly.R
 
@@ -16,11 +17,11 @@ val jomhuriaFontFamily = FontFamily(
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = jomhuriaFontFamily,
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         color = Color(0xFF2B3133),
         fontSize = 16.sp,
-        lineHeight = 16.sp,
+        lineHeight = 0.em,
         letterSpacing = 0.5.sp,
     )
     /* Other default text styles to override
