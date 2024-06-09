@@ -1,4 +1,4 @@
-package com.example.deskly.ui.LogIn
+package com.example.deskly.ui.SignUp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -19,7 +18,7 @@ import com.example.deskly.ui.component.CustomInputField
 import com.example.deskly.ui.theme.jomhuriaFontFamily
 
 @Composable
-fun LoginScreen(
+fun SignUpScreen(
     navController: NavController,
     authenticationViewModel: AuthenticationViewModel
 ) {
@@ -35,7 +34,7 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Log In",
+                text = "Sign Up",
                 fontFamily = jomhuriaFontFamily,
                 fontSize = 60.sp,
             )
@@ -54,17 +53,14 @@ fun LoginScreen(
             )
 
             CustomButton(
-                text = "Log In",
-                onClick = authenticationViewModel.logIn(inputEmail, inputPassword),
+                text = "Sign Up",
+                onClick = authenticationViewModel.signUp(
+                    email = inputEmail,
+                    password = inputPassword
+                ),
                 modifier = Modifier.padding(top = 20.dp)
             )
 
         }
     }
-}
-
-@Preview
-@Composable
-private fun LoginPagePreview() {
-    //LoginScreen(navController = NavController())
 }

@@ -12,12 +12,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LiveData
 import com.example.deskly.ui.theme.primaryBlue
+import com.google.firebase.auth.FirebaseUser
 
 @Composable
 fun CustomButton(
     text: String,
-    onClick: () -> Unit,
+    onClick: LiveData<FirebaseUser?>,
     modifier: Modifier = Modifier
 ) {
     Button(

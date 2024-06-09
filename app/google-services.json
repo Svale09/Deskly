@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243943830589",
+    "project_id": "deskly-55418",
+    "storage_bucket": "deskly-55418.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243943830589:android:ece79119ce3ae294646654",
+        "android_client_info": {
+          "package_name": "com.example.deskly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE9YVk7hlpjg3zGxSWlreEG5rfdHpt_Tc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

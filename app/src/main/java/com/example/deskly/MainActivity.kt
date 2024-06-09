@@ -10,8 +10,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.Home.HomeScreen
 import com.example.deskly.ui.LogIn.LoginScreen
+import com.example.deskly.ui.SignUp.SignUpScreen
 import com.example.deskly.ui.theme.DesklyTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +27,10 @@ class MainActivity : ComponentActivity() {
                         HomeScreen(navController = navController)
                     }
                     composable("log_in") {
-                        LoginScreen(navController = navController)
+                        LoginScreen(navController = navController, authenticationViewModel = AuthenticationViewModel())
+                    }
+                    composable(route = "sign_up") {
+                        SignUpScreen(navController = navController, authenticationViewModel = AuthenticationViewModel())
                     }
                 }
             }
