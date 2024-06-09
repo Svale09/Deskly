@@ -55,12 +55,12 @@ fun LoginScreen(
             )
 
             CustomButton(
-                text = "Sign Up",
+                text = "Log In",
                 onClick = {
-                    authenticationViewModel.signUp(
+                    authenticationViewModel.logIn(
                         email = inputEmail,
                         password = inputPassword
-                    );
+                    )
                     navController.navigate("resevre_desk")
                 },
                 modifier = Modifier.padding(top = 20.dp)
