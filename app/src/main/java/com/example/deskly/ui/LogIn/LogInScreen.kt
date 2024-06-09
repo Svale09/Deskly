@@ -23,6 +23,7 @@ fun LoginScreen(
     navController: NavController,
     authenticationViewModel: AuthenticationViewModel
 ) {
+
     var inputEmail: String = ""
     var inputPassword: String = ""
 
@@ -35,7 +36,7 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Log In",
+                text = "Sign Up",
                 fontFamily = jomhuriaFontFamily,
                 fontSize = 60.sp,
             )
@@ -54,11 +55,16 @@ fun LoginScreen(
             )
 
             CustomButton(
-                text = "Log In",
-                onClick = authenticationViewModel.logIn(inputEmail, inputPassword),
+                text = "Sign Up",
+                onClick = {
+                    authenticationViewModel.signUp(
+                        email = inputEmail,
+                        password = inputPassword
+                    );
+                    navController.navigate("resevre_desk")
+                },
                 modifier = Modifier.padding(top = 20.dp)
             )
-
         }
     }
 }

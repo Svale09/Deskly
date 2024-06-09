@@ -5,13 +5,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomInputField
 
 @Composable
 fun ReserveDeskScreen(
     onDeskSelected: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     var office: String = ""
 

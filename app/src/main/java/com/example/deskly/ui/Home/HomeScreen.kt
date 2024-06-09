@@ -38,7 +38,7 @@ fun HomeScreen(
                 text = "Log In",
                 onClick = { navController.navigate("log_in") },
                 modifier.padding(bottom = 10.dp))
-            CustomButton(text = "Sign Up", onClick = { /*TODO*/ })
+            CustomButton(text = "Sign Up", onClick = { navController.navigate("sign_up") })
         }
     }
 }

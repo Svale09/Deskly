@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.Home.HomeScreen
 import com.example.deskly.ui.LogIn.LoginScreen
+import com.example.deskly.ui.ReserveDesk.ReserveDeskScreen
 import com.example.deskly.ui.SignUp.SignUpScreen
 import com.example.deskly.ui.theme.DesklyTheme
 
@@ -31,6 +32,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = "sign_up") {
                         SignUpScreen(navController = navController, authenticationViewModel = AuthenticationViewModel())
+                    }
+                    composable("reserve_desk") {
+                        ReserveDeskScreen(navController = navController, onDeskSelected = {/*TODO reserve desk*/})
                     }
                 }
             }

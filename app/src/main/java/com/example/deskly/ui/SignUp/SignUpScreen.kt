@@ -54,13 +54,15 @@ fun SignUpScreen(
 
             CustomButton(
                 text = "Sign Up",
-                onClick = authenticationViewModel.signUp(
-                    email = inputEmail,
-                    password = inputPassword
-                ),
+                onClick = {
+                    authenticationViewModel.signUp(
+                        email = inputEmail,
+                        password = inputPassword
+                    );
+                    navController.navigate("resevre_desk")
+                },
                 modifier = Modifier.padding(top = 20.dp)
             )
-
         }
     }
 }
