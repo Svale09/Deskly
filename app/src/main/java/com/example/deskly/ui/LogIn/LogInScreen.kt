@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.CustomInputField
 import com.example.deskly.ui.theme.jomhuriaFontFamily
 
@@ -49,6 +50,9 @@ fun LoginScreen(
                 value = inputPassword,
                 onValueChange = { newPassword -> inputPassword = newPassword }
             )
+
+            CustomButton(text = "Log In", onClick = { /*TODO*/ }, modifier = Modifier.padding(top = 20.dp))
+
         }
     }
 }

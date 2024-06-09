@@ -3,7 +3,6 @@ package com.example.deskly
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,10 +17,8 @@ import com.example.deskly.ui.theme.DesklyTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-
-            setContent {
+            DesklyTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home_screen") {
                     composable("home_screen") {
@@ -30,10 +27,6 @@ class MainActivity : ComponentActivity() {
                     composable("log_in") {
                         LoginScreen(navController = navController)
                     }
-                }
-
-                DesklyTheme {
-                    HomeScreen(navController = navController)
                 }
             }
         }
