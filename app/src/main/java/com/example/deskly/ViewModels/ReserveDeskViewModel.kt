@@ -28,13 +28,13 @@ class ReserveDeskViewModel : ViewModel() {
     }
 
     fun loadDesksForOffice(office: Office) {
-        _desks.value = office.deskLayout.mapIndexed { index, isDesk ->
+        /*_desks.value = office.deskLayout.mapIndexed { index, isDesk ->
             Desk(
                 id = index,
                 officeId = office.id,
-                isReserved =
+                isReserved = isDesk == 1
             )
-        }
+        }*/
     }
 
     fun selectDesk(deskId: Int) {
