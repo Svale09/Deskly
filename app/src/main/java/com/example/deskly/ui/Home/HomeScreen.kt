@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,19 +26,23 @@ fun HomeScreen(
         Column(
             modifier
                 .fillMaxSize()
+                .padding(padding)
                 .padding(horizontal = 40.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
+                //modifier = Modifier.background(Color.Black),
                 text = "Deskly",
                 fontFamily = jomhuriaFontFamily,
-                fontSize = 80.sp
+                fontSize = 80.sp,
+                color = Color.Black
             )
             CustomButton(
                 text = "Log In",
                 onClick = { navController.navigate("log_in") },
-                modifier.padding(bottom = 10.dp))
+                modifier.padding(bottom = 10.dp)
+            )
             CustomButton(text = "Sign Up", onClick = { navController.navigate("sign_up") })
         }
     }

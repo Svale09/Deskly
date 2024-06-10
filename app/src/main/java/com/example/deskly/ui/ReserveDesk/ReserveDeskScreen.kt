@@ -1,34 +1,24 @@
 package com.example.deskly.ui.ReserveDesk
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DateRangePicker
-import androidx.compose.material3.DateRangePickerState
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.deskly.Models.Office
-import com.example.deskly.ViewModels.ReserveDeskViewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.deskly.Models.mockOffices
 import com.example.deskly.ui.component.CustomAppBar
-import java.time.LocalDateTime
-import java.time.ZoneId
-import androidx.compose.material3.DisplayMode
+import com.example.deskly.ui.component.CustomButton
+import com.example.deskly.ui.component.DatePicker
+import com.example.deskly.ui.component.OfficePicker
 
 
 @Composable
@@ -49,10 +39,37 @@ fun ReserveDeskScreen(
             )
         }
     ) { padding ->
-        Column {
-            Row() {
-                //TODO add the dropdown menu and the date picker.
+        Column(modifier = Modifier.padding(padding)) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 10.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                OfficePicker(offices = mockOffices)
+                DatePicker()
             }
+            //TODO create a function for displaying the desk grid
+            CustomButton(
+                text = "Reserve a desk",
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .padding(horizontal = 50.dp)
+                    .padding(vertical = 10.dp)
+            )
         }
     }
 }
+
+@Preview
+@Composable
+private fun PreviewReserveDeskScreen() {
+    val mockNavController = rememberNavController()
+    ReserveDeskScreen(
+        onDeskSelected = {},
+        onLogOutClick = {},
+        navController = mockNavController
+    )
+}
+

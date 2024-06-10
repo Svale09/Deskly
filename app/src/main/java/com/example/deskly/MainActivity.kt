@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                             onDeskSelected = {/*TODO reserve desk*/ },
                             onLogOutClick = {
                                 authenticationViewModel.logOut();
-                                navController.popBackStack(route = "home_screen", inclusive = false)
+                                navController.navigate("home_screen")
                             })
                     }
                 }
