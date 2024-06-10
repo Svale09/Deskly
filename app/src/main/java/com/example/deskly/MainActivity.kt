@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     composable(route = "sign_up") {
                         SignUpScreen(navController = navController, authenticationViewModel = AuthenticationViewModel())
                     }
-                    composable("reserve_desk") {
+                    composable(route = "reserve_desk") {
                         ReserveDeskScreen(navController = navController, onDeskSelected = {/*TODO reserve desk*/})
                     }
                 }

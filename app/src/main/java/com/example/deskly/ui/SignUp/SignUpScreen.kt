@@ -59,7 +59,7 @@ fun SignUpScreen(
                         email = inputEmail,
                         password = inputPassword
                     );
-                    navController.navigate("resevre_desk")
+                    navController.navigate("reserve_desk")
                 },
                 modifier = Modifier.padding(top = 20.dp)
             )

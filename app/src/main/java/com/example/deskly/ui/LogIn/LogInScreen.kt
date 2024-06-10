@@ -7,6 +7,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,9 +29,21 @@ fun LoginScreen(
     navController: NavController,
     authenticationViewModel: AuthenticationViewModel
 ) {
+    var inputEmail by remember { mutableStateOf("") }
+    var inputPassword by remember { mutableStateOf("") }
 
-    var inputEmail: String = ""
-    var inputPassword: String = ""
+    val loginState by authenticationViewModel.loginState.observeAsState()
+
+    // Navigate to reserve_desk screen if login is successful
+    loginState?.let { user ->
+        if (user != null) {
+            LaunchedEffect(Unit) {
+                navController.navigate("reserve_desk") {
+                    popUpTo("log_in") { inclusive = true }
+                }
+            }
+        }
+    }
 
     Scaffold { padding ->
         Column(
@@ -36,7 +54,7 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Sign Up",
+                text = "Log In",
                 fontFamily = jomhuriaFontFamily,
                 fontSize = 60.sp,
             )
@@ -61,7 +79,6 @@ fun LoginScreen(
                         email = inputEmail,
                         password = inputPassword
                     )
-                    navController.navigate("resevre_desk")
                 },
                 modifier = Modifier.padding(top = 20.dp)
             )
@@ -72,5 +89,5 @@ fun LoginScreen(
 @Preview
 @Composable
 private fun LoginPagePreview() {
-    //LoginScreen(navController = NavController())
+    // LoginScreen(navController = NavController())
 }
