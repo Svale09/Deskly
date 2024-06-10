@@ -43,13 +43,15 @@ fun SignUpScreen(
                 placeholder = "Enter your email",
                 value = inputEmail,
                 onValueChange = { newEmail -> inputEmail = newEmail },
+                isPasswordField = false
             )
 
             CustomInputField(
                 label = "Password",
                 placeholder = "Input your password",
                 value = inputPassword,
-                onValueChange = { newPassword -> inputPassword = newPassword }
+                onValueChange = { newPassword -> inputPassword = newPassword },
+                isPasswordField = true
             )
 
             CustomButton(
