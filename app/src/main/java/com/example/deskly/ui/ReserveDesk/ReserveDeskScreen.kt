@@ -21,7 +21,8 @@ fun ReserveDeskScreen(
         topBar = {
             CustomAppBar(
                 title = "Reserve Desk",
-                modifier = modifier
+                modifier = modifier,
+                onLogOutClick = {}
             )
         }
     ) { padding ->

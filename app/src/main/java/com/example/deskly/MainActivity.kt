@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
@@ -23,15 +25,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             DesklyTheme {
                 val navController = rememberNavController()
+                val authenticationViewModel = remember { AuthenticationViewModel() }
+
+                LaunchedEffect(Unit) {
+                    if (authenticationViewModel.currentUser != null) {
+                        navController.navigate("reserve_desk") {
+                            popUpTo("home_screen") { inclusive = true }
+                        }
+                    }
+                }
+
+
                 NavHost(navController = navController, startDestination = "home_screen") {
                     composable("home_screen") {
                         HomeScreen(navController = navController)
                     }
                     composable("log_in") {
-                        LoginScreen(navController = navController, authenticationViewModel = AuthenticationViewModel())
+                        LoginScreen(navController = navController, authenticationViewModel = authenticationViewModel)
                     }
                     composable(route = "sign_up") {
-                        SignUpScreen(navController = navController, authenticationViewModel = AuthenticationViewModel())
+                        SignUpScreen(navController = navController, authenticationViewModel = authenticationViewModel)
                     }
                     composable(route = "reserve_desk") {
                         ReserveDeskScreen(navController = navController, onDeskSelected = {/*TODO reserve desk*/})

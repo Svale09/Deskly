@@ -16,7 +16,8 @@ import com.example.deskly.ui.theme.primaryBlue
 @Composable
 fun CustomAppBar(
     title: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onLogOutClick: () -> Unit = {},
 ) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
@@ -30,6 +31,7 @@ fun CustomAppBar(
                 color = Color.White
             )
         },
+        //actions =
         modifier = modifier,
     )
 }

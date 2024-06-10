@@ -43,6 +43,8 @@ class AuthenticationViewModel : ViewModel() {
 
     fun logOut() {
         auth.signOut()
+        _loginState.postValue(null)
+        _signUpState.postValue(null)
     }
 
     val currentUser get() = auth.currentUser
