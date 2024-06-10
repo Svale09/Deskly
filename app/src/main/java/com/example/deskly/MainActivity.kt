@@ -41,13 +41,25 @@ class MainActivity : ComponentActivity() {
                         HomeScreen(navController = navController)
                     }
                     composable("log_in") {
-                        LoginScreen(navController = navController, authenticationViewModel = authenticationViewModel)
+                        LoginScreen(
+                            navController = navController,
+                            authenticationViewModel = authenticationViewModel
+                        )
                     }
                     composable(route = "sign_up") {
-                        SignUpScreen(navController = navController, authenticationViewModel = authenticationViewModel)
+                        SignUpScreen(
+                            navController = navController,
+                            authenticationViewModel = authenticationViewModel
+                        )
                     }
                     composable(route = "reserve_desk") {
-                        ReserveDeskScreen(navController = navController, onDeskSelected = {/*TODO reserve desk*/})
+                        ReserveDeskScreen(
+                            navController = navController,
+                            onDeskSelected = {/*TODO reserve desk*/ },
+                            onLogOutClick = {
+                                authenticationViewModel.logOut();
+                                navController.popBackStack(route = "home_screen", inclusive = false)
+                            })
                     }
                 }
             }

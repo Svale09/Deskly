@@ -13,7 +13,8 @@ import com.example.deskly.ui.component.CustomInputField
 fun ReserveDeskScreen(
     onDeskSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    onLogOutClick: () -> Unit
 ) {
     var office: String = ""
 
@@ -22,7 +23,7 @@ fun ReserveDeskScreen(
             CustomAppBar(
                 title = "Reserve Desk",
                 modifier = modifier,
-                onLogOutClick = {}
+                onLogOutClick = onLogOutClick
             )
         }
     ) { padding ->
