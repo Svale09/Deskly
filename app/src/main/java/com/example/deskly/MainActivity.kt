@@ -20,6 +20,7 @@ import com.example.deskly.ui.SignUp.SignUpScreen
 import com.example.deskly.ui.theme.DesklyTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

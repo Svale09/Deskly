@@ -9,9 +9,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -30,7 +37,8 @@ import com.example.deskly.ui.component.OfficePicker
 data class BottomNavigationItem(
     val title: String,
     val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector
+    val unselectedIcon: ImageVector,
+    val route: String
 )
 
 
@@ -47,15 +55,19 @@ fun ReserveDeskScreen(
     val items = listOf(
         BottomNavigationItem(
             title = "Reserve Desk",
-            selectedIcon = ImageVector.vectorResource(id = R.drawable.calendar),
-            unselectedIcon = ImageVector.vectorResource(id = R.drawable.)
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.calendar_selected),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.calendar),
+            route = "reserve_desk"
         ),
         BottomNavigationItem(
             title = "Add Office",
-            selectedIcon = ImageVector.vectorResource(id = R.drawable.edit_unselected),
-            unselectedIcon = ImageVector.vectorResource(id = R.drawable.)
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.edit_selected),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.edit_unselected),
+            route = "add_office"
         )
     )
+
+    var selectetItemIndex by rememberSaveable { mutableStateOf(0) }
 
     Scaffold(
         topBar = {
@@ -66,15 +78,34 @@ fun ReserveDeskScreen(
             )
         },
         bottomBar = {
-            NavigationBar {
-
+            if (userRole.value == 0) {
+                NavigationBar {
+                    items.forEachIndexed { index, item ->
+                        NavigationBarItem(
+                            label = { Text(text = item.title) },
+                            selected = selectetItemIndex == index,
+                            onClick = {
+                                selectetItemIndex = index;
+                                navController.navigate(item.route)
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = if (index == selectetItemIndex) {
+                                        item.selectedIcon
+                                    } else item.unselectedIcon,
+                                    contentDescription = item.title
+                                )
+                            })
+                    }
+                }
             }
         }
 
     ) { padding ->
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(padding)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
         ) {
             Column(
                 modifier = Modifier
@@ -109,7 +140,7 @@ fun ReserveDeskScreen(
 }
 
 @Composable
-fun DeskGrid(){
+fun DeskGrid() {
     //TODO
 }
 
@@ -122,7 +153,7 @@ private fun PreviewReserveDeskScreen() {
         onDeskSelected = {},
         onLogOutClick = {},
         navController = mockNavController,
-        userRole = MutableLiveData(1)
+        userRole = MutableLiveData(0)
     )
 }
 
