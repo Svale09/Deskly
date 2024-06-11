@@ -50,6 +50,7 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 20.dp)
+                .padding(top = 20.dp)
                 .padding(padding),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -72,7 +73,8 @@ fun LoginScreen(
                 placeholder = "Input your password",
                 value = inputPassword,
                 onValueChange = { newPassword -> inputPassword = newPassword },
-                isPasswordField = true
+                isPasswordField = true,
+                modifier = Modifier.padding(top = 20.dp)
             )
 
             CustomButton(
