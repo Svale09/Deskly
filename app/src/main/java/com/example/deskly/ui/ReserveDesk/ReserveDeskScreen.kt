@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.deskly.Models.mockOffices
@@ -22,6 +25,12 @@ import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.DatePicker
 import com.example.deskly.ui.component.OfficePicker
 
+data class BottomNavigationItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector
+)
+
 
 @Composable
 fun ReserveDeskScreen(
@@ -29,9 +38,22 @@ fun ReserveDeskScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     onLogOutClick: () -> Unit,
-    userRole: Int
+    userRole: MutableLiveData<Int>
 ) {
     var office: String = ""
+
+    val items = listOf(
+        BottomNavigationItem(
+            title = "Reserve Desk",
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home_selected),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home_unselected)
+        ),
+        BottomNavigationItem(
+            title = "Add Office",
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_reserve_selected),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.ic_reserve_unselected)
+        )
+    )
 
     Scaffold(
         topBar = {
@@ -41,6 +63,11 @@ fun ReserveDeskScreen(
                 onLogOutClick = onLogOutClick
             )
         },
+        bottomBar = {
+            NavigationBar {
+
+            }
+        }
 
     ) { padding ->
         Box(modifier = Modifier
@@ -92,7 +119,8 @@ private fun PreviewReserveDeskScreen() {
     ReserveDeskScreen(
         onDeskSelected = {},
         onLogOutClick = {},
-        navController = mockNavController
+        navController = mockNavController,
+        userRole = MutableLiveData(1)
     )
 }
 

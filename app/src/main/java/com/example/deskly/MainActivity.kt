@@ -58,7 +58,8 @@ class MainActivity : ComponentActivity() {
                             onLogOutClick = {
                                 authenticationViewModel.logOut()
                                 navController.navigate("home_screen")
-                            }
+                            },
+                            userRole = authenticationViewModel.userRole
                         )
                     }
                 }
