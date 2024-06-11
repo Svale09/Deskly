@@ -14,12 +14,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.deskly.Models.mockOffices
+import com.example.deskly.R
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.DatePicker
@@ -45,13 +47,13 @@ fun ReserveDeskScreen(
     val items = listOf(
         BottomNavigationItem(
             title = "Reserve Desk",
-            selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home_selected),
-            unselectedIcon = ImageVector.vectorResource(id = R.drawable.ic_home_unselected)
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.calendar),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.)
         ),
         BottomNavigationItem(
             title = "Add Office",
-            selectedIcon = ImageVector.vectorResource(id = R.drawable.ic_reserve_selected),
-            unselectedIcon = ImageVector.vectorResource(id = R.drawable.ic_reserve_unselected)
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.edit_unselected),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.)
         )
     )
 
