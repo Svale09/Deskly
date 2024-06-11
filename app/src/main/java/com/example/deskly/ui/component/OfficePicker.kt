@@ -38,14 +38,14 @@ fun OfficePicker(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .border(2.dp, Color.Black, RoundedCornerShape(16.dp))
-            .background(Color.White)
+            .background(Color.Transparent)
             .clickable { expanded = !expanded }
             .padding(10.dp)
             .width(175.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = (if(selectedOfficeId.isEmpty()){
+            text = (if (selectedOfficeId.isEmpty()) {
                 "Select Office"
             } else {
                 offices.find { it.id == selectedOfficeId }?.name ?: ""
