@@ -28,7 +28,8 @@ fun ReserveDeskScreen(
     onDeskSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
     navController: NavController,
-    onLogOutClick: () -> Unit
+    onLogOutClick: () -> Unit,
+    userRole: Int
 ) {
     var office: String = ""
 
@@ -39,7 +40,8 @@ fun ReserveDeskScreen(
                 modifier = modifier,
                 onLogOutClick = onLogOutClick
             )
-        }
+        },
+
     ) { padding ->
         Box(modifier = Modifier
             .fillMaxSize()

@@ -4,17 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.deskly.Data.FirestoreRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class AuthenticationViewModel : ViewModel() {
+    private val firestoreRepository = FirestoreRepository()
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _loginState = MutableLiveData<FirebaseUser?>()
     val loginState: LiveData<FirebaseUser?> get() = _loginState
+
+    val userRole = MutableLiveData<Int>()
 
     private val _signUpState = MutableLiveData<FirebaseUser?>()
     val signUpState: LiveData<FirebaseUser?> get() = _signUpState
@@ -24,6 +28,7 @@ class AuthenticationViewModel : ViewModel() {
             try {
                 val result = auth.signInWithEmailAndPassword(email, password).await()
                 _loginState.postValue(result.user)
+                result.user?.email?.let { firestoreRepository.fetchUserRoleByEmail(it) }
             } catch (e: Exception) {
                 _loginState.postValue(null)
             }
@@ -39,6 +44,10 @@ class AuthenticationViewModel : ViewModel() {
                 _signUpState.postValue(null)
             }
         }
+        firestoreRepository.addNewUser(
+            email,
+            role = 1
+        ) //initial user role is 1, as admin role is set in firebaser
     }
 
     fun logOut() {
