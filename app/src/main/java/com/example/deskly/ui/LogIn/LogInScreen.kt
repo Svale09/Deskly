@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.CustomInputField
@@ -36,20 +37,20 @@ fun LoginScreen(
 
     // Navigate to reserve_desk screen if login is successful
     loginState?.let { user ->
-        if (user != null) {
-            LaunchedEffect(Unit) {
-                navController.navigate("reserve_desk") {
-                    popUpTo("log_in") { inclusive = true }
-                }
+        LaunchedEffect(Unit) {
+            navController.navigate("reserve_desk") {
+                popUpTo("log_in") { inclusive = true }
             }
         }
     }
+
 
     Scaffold { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 20.dp),
+                .padding(horizontal = 20.dp)
+                .padding(padding),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -91,5 +92,6 @@ fun LoginScreen(
 @Preview
 @Composable
 private fun LoginPagePreview() {
-    // LoginScreen(navController = NavController())
+    val mockNavController = rememberNavController()
+    LoginScreen(navController = mockNavController, authenticationViewModel = AuthenticationViewModel())
 }

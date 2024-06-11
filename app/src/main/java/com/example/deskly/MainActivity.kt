@@ -35,7 +35,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-
                 NavHost(navController = navController, startDestination = "home_screen") {
                     composable("home_screen") {
                         HomeScreen(navController = navController)
@@ -55,11 +54,12 @@ class MainActivity : ComponentActivity() {
                     composable(route = "reserve_desk") {
                         ReserveDeskScreen(
                             navController = navController,
-                            onDeskSelected = {/*TODO reserve desk*/ },
+                            onDeskSelected = { /*TODO reserve desk*/ },
                             onLogOutClick = {
-                                authenticationViewModel.logOut();
+                                authenticationViewModel.logOut()
                                 navController.navigate("home_screen")
-                            })
+                            }
+                        )
                     }
                 }
             }

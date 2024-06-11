@@ -21,7 +21,7 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         color = Color(0xFF2B3133),
         fontSize = 16.sp,
-        lineHeight = 0.em,
+        lineHeight = 1.em,
         letterSpacing = 0.5.sp,
     )
     /* Other default text styles to override
@@ -41,5 +41,3 @@ val Typography = Typography(
     )
     */
 )
-
-

@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.theme.jomhuriaFontFamily
 
@@ -32,11 +33,10 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                //modifier = Modifier.background(Color.Black),
                 text = "Deskly",
                 fontFamily = jomhuriaFontFamily,
                 fontSize = 80.sp,
-                color = Color.Black
+                color = Color.DarkGray
             )
             CustomButton(
                 text = "Log In",
@@ -51,5 +51,6 @@ fun HomeScreen(
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    //HomeScreen()
+    val mockNavController = rememberNavController()
+    HomeScreen(navController = mockNavController)
 }
