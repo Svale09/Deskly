@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.deskly.Models.mockOffices
@@ -48,7 +47,7 @@ fun ReserveDeskScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     onLogOutClick: () -> Unit,
-    userRole: MutableLiveData<Int>
+    userRole: Int?
 ) {
     var office: String = ""
 
@@ -78,7 +77,7 @@ fun ReserveDeskScreen(
             )
         },
         bottomBar = {
-            if (userRole.value == 0) {
+            if (userRole == 0) {
                 NavigationBar {
                     items.forEachIndexed { index, item ->
                         NavigationBarItem(
@@ -123,6 +122,7 @@ fun ReserveDeskScreen(
                         OfficePicker(offices = mockOffices)
                         DatePicker()
                     }
+                    Text(text = "User role: $userRole")
                     //TODO create a function for displaying the desk grid
                 }
                 Spacer(modifier = Modifier.weight(1f))
@@ -153,7 +153,7 @@ private fun PreviewReserveDeskScreen() {
         onDeskSelected = {},
         onLogOutClick = {},
         navController = mockNavController,
-        userRole = MutableLiveData(0)
+        userRole = 0
     )
 }
 

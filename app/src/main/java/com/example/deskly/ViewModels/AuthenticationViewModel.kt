@@ -18,7 +18,7 @@ class AuthenticationViewModel : ViewModel() {
     private val _loginState = MutableLiveData<FirebaseUser?>()
     val loginState: LiveData<FirebaseUser?> get() = _loginState
 
-    val userRole = MutableLiveData<Int>()
+    var userRole: Int = 0
 
     private val _signUpState = MutableLiveData<FirebaseUser?>()
     val signUpState: LiveData<FirebaseUser?> get() = _signUpState
@@ -28,7 +28,7 @@ class AuthenticationViewModel : ViewModel() {
             try {
                 val result = auth.signInWithEmailAndPassword(email, password).await()
                 _loginState.postValue(result.user)
-                result.user?.email?.let { firestoreRepository.fetchUserRoleByEmail(it) }
+                userRole = firestoreRepository.fetchUserRoleByEmail(email)!!
             } catch (e: Exception) {
                 _loginState.postValue(null)
             }

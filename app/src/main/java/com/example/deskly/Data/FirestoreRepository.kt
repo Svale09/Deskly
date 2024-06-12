@@ -27,21 +27,24 @@ class FirestoreRepository {
 
     suspend fun fetchUserRoleByEmail(email: String): Int? {
         return try {
-            // Query the "users" collection for the document with the specified email
+            // Query the "users" collection where the "email" field matches the provided email
             val querySnapshot = db.collection("users")
                 .whereEqualTo("email", email)
                 .get()
                 .await()
 
-            // If there's no matching document, return null
-            if (querySnapshot.isEmpty) {
-                null
+            // Check if any documents are returned
+            if (querySnapshot.documents.isNotEmpty()) {
+                // Get the first document (assuming emails are unique)
+                val document = querySnapshot.documents[0]
+                // Return the "role" field as an Integer
+                document.getLong("role")?.toInt()
             } else {
-                // Extract the userRole from the first document
-                val userRole = querySnapshot.documents[0].getLong("userRole")?.toInt()
-                userRole
+                // If no documents found, return null
+                null
             }
         } catch (e: Exception) {
+            // Handle the exception
             e.printStackTrace()
             null
         }
