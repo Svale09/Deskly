@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -21,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -32,6 +32,9 @@ import com.example.deskly.R
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.CustomInputField
+import com.example.deskly.ui.component.IconAndLabelButton
+import com.example.deskly.ui.theme.primaryBlue
+import com.example.deskly.ui.theme.primaryRed
 
 
 @Composable
@@ -111,20 +114,28 @@ fun AddOfficeScreen(
                     //TODO create a function for displaying the desk grid
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                Column {
-                    Row {
-                        IconButton(onClick = { /*TODO */ }) {
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.add_desk),
-                                contentDescription = "Add desk"
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.remove_desk),
-                                contentDescription = "Remove desk"
-                            )
-                        }
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 100.dp),
+                        horizontalArrangement = Arrangement.SpaceAround,
+                    ) {
+                        IconAndLabelButton(
+                            title = "Add desk",
+                            vector = ImageVector.vectorResource(id = R.drawable.add_desk),
+                            onClick = { /*TODO*/ },
+                            color = primaryBlue
+                        )
+                        IconAndLabelButton(
+                            title = "Remove desk",
+                            vector = ImageVector.vectorResource(id = R.drawable.remove_desk),
+                            onClick = { /*TODO*/ },
+                            color = primaryRed
+                        )
                     }
                     CustomButton(
                         text = "Save office",

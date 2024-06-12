@@ -122,7 +122,6 @@ fun ReserveDeskScreen(
                         OfficePicker(offices = mockOffices)
                         DatePicker()
                     }
-                    Text(text = "User role: $userRole")
                     //TODO create a function for displaying the desk grid
                 }
                 Spacer(modifier = Modifier.weight(1f))
