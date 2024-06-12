@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.deskly.Utilities.SharedPrefsManager
 import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.Home.HomeScreen
 import com.example.deskly.ui.LogIn.LoginScreen
@@ -25,8 +26,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DesklyTheme {
+                val sharedPrefsManager = SharedPrefsManager.getInstance(this)
+
                 val navController = rememberNavController()
-                val authenticationViewModel = remember { AuthenticationViewModel() }
+                val authenticationViewModel = remember { AuthenticationViewModel(this) }
+
 
                 LaunchedEffect(Unit) {
                     if (authenticationViewModel.currentUser != null) {
@@ -60,7 +64,7 @@ class MainActivity : ComponentActivity() {
                                 authenticationViewModel.logOut()
                                 navController.navigate("home_screen")
                             },
-                            userRole = authenticationViewModel.userRole
+                            userRole = sharedPrefsManager.getUserRole()
                         )
                     }
                 }

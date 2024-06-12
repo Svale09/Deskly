@@ -1,24 +1,26 @@
 package com.example.deskly.ViewModels
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.deskly.Data.FirestoreRepository
+import com.example.deskly.Utilities.SharedPrefsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class AuthenticationViewModel : ViewModel() {
+class AuthenticationViewModel(context: Context) : ViewModel() {
+
+    private val sharedPrefsManager = SharedPrefsManager.getInstance(context)
     private val firestoreRepository = FirestoreRepository()
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _loginState = MutableLiveData<FirebaseUser?>()
     val loginState: LiveData<FirebaseUser?> get() = _loginState
-
-    var userRole: Int = 0
 
     private val _signUpState = MutableLiveData<FirebaseUser?>()
     val signUpState: LiveData<FirebaseUser?> get() = _signUpState
@@ -28,7 +30,9 @@ class AuthenticationViewModel : ViewModel() {
             try {
                 val result = auth.signInWithEmailAndPassword(email, password).await()
                 _loginState.postValue(result.user)
-                userRole = firestoreRepository.fetchUserRoleByEmail(email)!!
+                val userRole: Int = firestoreRepository.fetchUserRoleByEmail(email)!!
+                sharedPrefsManager.saveUserRole(userRole)
+
             } catch (e: Exception) {
                 _loginState.postValue(null)
             }

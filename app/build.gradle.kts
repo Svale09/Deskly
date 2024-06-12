@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.accompanist.drawablepainter)
     implementation(libs.androidx.material3.android)
+    implementation(libs.preference)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
