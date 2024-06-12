@@ -1,4 +1,4 @@
-package com.example.deskly.Utilities
+package com.example.deskly.utilities
 
 import android.content.Context
 import android.content.SharedPreferences

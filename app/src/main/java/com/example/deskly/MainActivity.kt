@@ -12,13 +12,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.deskly.Utilities.SharedPrefsManager
-import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.screens.HomeScreen
 import com.example.deskly.ui.screens.LoginScreen
 import com.example.deskly.ui.screens.ReserveDeskScreen
 import com.example.deskly.ui.screens.SignUpScreen
 import com.example.deskly.ui.theme.DesklyTheme
+import com.example.deskly.utilities.SharedPrefsManager
+import com.example.deskly.viewModels.AuthenticationViewModel
 
 class MainActivity : ComponentActivity() {
 

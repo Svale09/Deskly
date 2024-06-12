@@ -1,12 +1,12 @@
-package com.example.deskly.ViewModels
+package com.example.deskly.viewModels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.deskly.Data.FirestoreRepository
-import com.example.deskly.Utilities.SharedPrefsManager
+import com.example.deskly.data.FirestoreRepository
+import com.example.deskly.utilities.SharedPrefsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch

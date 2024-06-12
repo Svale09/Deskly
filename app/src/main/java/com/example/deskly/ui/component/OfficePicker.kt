@@ -23,8 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.deskly.Models.Office
-import com.example.deskly.Models.mockOffices
+import com.example.deskly.models.Office
+import com.example.deskly.models.mockOffices
 
 @Composable
 fun OfficePicker(

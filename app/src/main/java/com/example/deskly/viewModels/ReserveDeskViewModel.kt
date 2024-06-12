@@ -1,10 +1,10 @@
-package com.example.deskly.ViewModels
+package com.example.deskly.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.deskly.Models.Desk
-import com.example.deskly.Models.Office
+import com.example.deskly.models.Desk
+import com.example.deskly.models.Office
 
 class ReserveDeskViewModel : ViewModel() {
 

@@ -1,4 +1,4 @@
-package com.example.deskly.Models
+package com.example.deskly.models
 
 import java.util.Date
 
