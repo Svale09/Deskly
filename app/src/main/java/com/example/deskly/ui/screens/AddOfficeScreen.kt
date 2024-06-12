@@ -121,7 +121,8 @@ fun AddOfficeScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 100.dp),
+                            .padding(horizontal = 75.dp)
+                            .padding(bottom = 10.dp),
                         horizontalArrangement = Arrangement.SpaceAround,
                     ) {
                         IconAndLabelButton(
@@ -143,7 +144,7 @@ fun AddOfficeScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 50.dp)
-                            .padding(bottom = 30.dp)
+                            .padding(bottom = 20.dp)
                     )
                 }
             }

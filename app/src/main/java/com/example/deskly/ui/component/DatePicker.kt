@@ -41,7 +41,7 @@ fun DatePicker(
             val selectedCalendar = Calendar.getInstance().apply {
                 set(year, month, dayOfMonth)
             }
-            selectedDate = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(selectedCalendar.time)
+            selectedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selectedCalendar.time)
         },
         calendar.get(Calendar.YEAR),
         calendar.get(Calendar.MONTH),

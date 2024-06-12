@@ -131,7 +131,7 @@ fun ReserveDeskScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 50.dp)
-                        .padding(bottom = 30.dp)
+                        .padding(bottom = 20.dp)
                 )
             }
         }
