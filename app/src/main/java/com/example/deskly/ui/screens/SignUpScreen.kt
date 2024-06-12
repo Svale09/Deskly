@@ -1,4 +1,4 @@
-package com.example.deskly.ui.SignUp
+package com.example.deskly.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

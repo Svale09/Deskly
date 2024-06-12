@@ -1,4 +1,4 @@
-package com.example.deskly.ui.Home
+package com.example.deskly.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
