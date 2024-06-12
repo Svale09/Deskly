@@ -65,6 +65,9 @@ class MainActivity : ComponentActivity() {
                                 authenticationViewModel.logOut()
                                 navController.navigate("home_screen") {
                                     popUpTo(route = "home_screen") { inclusive = true }
+                                    /*TODO fix the navigation when the user is logged in before
+                                       openning the app and then logs out - in that case tapping on
+                                       the back button leads back to the reserve desk screen*/
                                 }
                             },
                             userRole = sharedPrefsManager.getUserRole()
