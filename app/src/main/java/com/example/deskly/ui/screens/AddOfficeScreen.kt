@@ -1,12 +1,5 @@
 package com.example.deskly.ui.screens
 
-import androidx.compose.material3.IconButton
-import androidx.compose.runtime.remember
-import com.example.deskly.ui.component.CustomInputField
-
-package com.example.deskly.ui.screens
-
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,13 +9,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -32,12 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.deskly.models.mockOffices
 import com.example.deskly.R
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
-import com.example.deskly.ui.component.DatePicker
-import com.example.deskly.ui.component.OfficePicker
+import com.example.deskly.ui.component.CustomInputField
 
 
 @Composable
@@ -63,7 +57,7 @@ fun AddOfficeScreen(
         )
     )
 
-    var selectetItemIndex by rememberSaveable { mutableStateOf(0) }
+    var selectetItemIndex by rememberSaveable { mutableIntStateOf(1) }
 
     Scaffold(
         topBar = {
@@ -80,7 +74,7 @@ fun AddOfficeScreen(
                         label = { Text(text = item.title) },
                         selected = selectetItemIndex == index,
                         onClick = {
-                            selectetItemIndex = index;
+                            selectetItemIndex = index
                             navController.navigate(item.route)
                         },
                         icon = {
@@ -120,10 +114,16 @@ fun AddOfficeScreen(
                 Column {
                     Row {
                         IconButton(onClick = { /*TODO */ }) {
-                            
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.add_desk),
+                                contentDescription = "Add desk"
+                            )
                         }
                         IconButton(onClick = { /*TODO*/ }) {
-                            
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.remove_desk),
+                                contentDescription = "Remove desk"
+                            )
                         }
                     }
                     CustomButton(
@@ -140,21 +140,14 @@ fun AddOfficeScreen(
     }
 }
 
-@Composable
-fun DeskGrid() {
-    //TODO
-}
-
 
 @Preview
 @Composable
-private fun PreviewReserveDeskScreen() {
+private fun PreviewAddOfficeScreen() {
     val mockNavController = rememberNavController()
-    ReserveDeskScreen(
-        onDeskSelected = {},
-        onLogOutClick = {},
+    AddOfficeScreen(
         navController = mockNavController,
-        userRole = 0
+        onLogOutClick = {}
     )
 }
 

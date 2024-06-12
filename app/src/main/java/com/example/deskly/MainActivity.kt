@@ -12,13 +12,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.deskly.ViewModels.AuthenticationViewModel
+import com.example.deskly.ui.screens.AddOfficeScreen
 import com.example.deskly.ui.screens.HomeScreen
 import com.example.deskly.ui.screens.LoginScreen
 import com.example.deskly.ui.screens.ReserveDeskScreen
 import com.example.deskly.ui.screens.SignUpScreen
 import com.example.deskly.ui.theme.DesklyTheme
-import com.example.deskly.utilities.SharedPrefsManager
-import com.example.deskly.viewModels.AuthenticationViewModel
+import com.example.deskly.utils.SharedPrefsManager
 
 class MainActivity : ComponentActivity() {
 
@@ -62,9 +63,22 @@ class MainActivity : ComponentActivity() {
                             onDeskSelected = { /*TODO reserve desk*/ },
                             onLogOutClick = {
                                 authenticationViewModel.logOut()
-                                navController.navigate("home_screen")
+                                navController.navigate("home_screen") {
+                                    popUpTo(route = "home_screen") { inclusive = true }
+                                }
                             },
                             userRole = sharedPrefsManager.getUserRole()
+                        )
+                    }
+                    composable(route = "add_office") {
+                        AddOfficeScreen(
+                            navController = navController,
+                            onLogOutClick = {
+                                authenticationViewModel.logOut()
+                                navController.navigate("home_screen") {
+                                    popUpTo(route = "home_screen") { inclusive = true }
+                                }
+                            },
                         )
                     }
                 }

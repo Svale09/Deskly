@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.deskly.viewModels.AuthenticationViewModel
+import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.CustomInputField
 import com.example.deskly.ui.theme.jomhuriaFontFamily

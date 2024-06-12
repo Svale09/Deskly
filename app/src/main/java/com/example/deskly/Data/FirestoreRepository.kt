@@ -1,4 +1,4 @@
-package com.example.deskly.data
+package com.example.deskly.Data
 
 import android.content.ContentValues.TAG
 import android.util.Log

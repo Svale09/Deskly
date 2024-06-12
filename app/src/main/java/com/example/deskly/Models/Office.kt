@@ -1,4 +1,4 @@
-package com.example.deskly.models
+package com.example.deskly.Models
 
 data class Office(
     val id: String,
