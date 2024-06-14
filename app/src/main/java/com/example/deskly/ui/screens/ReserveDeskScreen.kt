@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -28,7 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.deskly.Models.Desk
 import com.example.deskly.Models.mockOffices
 import com.example.deskly.R
 import com.example.deskly.ui.component.CustomAppBar
@@ -138,15 +135,6 @@ fun ReserveDeskScreen(
                 )
             }
         }
-    }
-}
-
-@Composable
-fun DeskGrid(
-    desks: List<Desk>
-) {
-    LazyVerticalGrid(columns = GridCells.Fixed(4)) {
-        
     }
 }
 
