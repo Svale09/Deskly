@@ -25,7 +25,7 @@ import com.example.deskly.ui.theme.primaryBlue
 import com.example.deskly.ui.theme.primaryRed
 
 @Composable
-fun DeskIcon(
+fun DeskItem(
     isReserved: Boolean
 ) {
     var backgroundColor by remember { mutableStateOf(if (isReserved) primaryRed else Color.Transparent) }
@@ -62,5 +62,5 @@ fun DeskIcon(
 @Preview
 @Composable
 fun DeskIconPreview() {
-    DeskIcon(isReserved = false)
+    DeskItem(isReserved = false)
 }
