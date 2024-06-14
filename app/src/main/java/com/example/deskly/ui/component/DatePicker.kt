@@ -49,7 +49,7 @@ fun DatePicker(
     )
 
     // Set maximum date to 5 days in the future
-    datePickerDialog.datePicker.maxDate = calendar.timeInMillis + 6 * 24 * 60 * 60 * 1000
+    datePickerDialog.datePicker.maxDate = calendar.timeInMillis + 5 * 24 * 60 * 60 * 1000
     datePickerDialog.datePicker.minDate = calendar.timeInMillis + 1 * 24 * 60 * 60 * 1000
 
     Box(
