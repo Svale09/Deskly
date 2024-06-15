@@ -64,11 +64,11 @@ fun CustomInputField(
                 unfocusedContainerColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-                unfocusedPlaceholderColor = Color.Gray,
-                focusedPlaceholderColor = Color.Gray,
+                unfocusedPlaceholderColor = Color.LightGray,
+                focusedPlaceholderColor = Color.LightGray,
                 errorContainerColor = primaryRed,
                 errorIndicatorColor = primaryRed,
-                errorPlaceholderColor = primaryRed
+                errorPlaceholderColor = primaryRed,
             ),
             placeholder = { Text(text = placeholder) },
             trailingIcon = {
