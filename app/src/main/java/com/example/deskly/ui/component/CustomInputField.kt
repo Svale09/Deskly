@@ -41,7 +41,7 @@ fun CustomInputField(
     modifier: Modifier = Modifier
 ) {
     val errorState = remember { mutableStateOf(false) }
-    val state = remember { mutableStateOf(value) }
+    //val state = remember { mutableStateOf(value) }
     var passwordVisible by remember { mutableStateOf(false) }
 
     Column(modifier = modifier) {
@@ -52,11 +52,8 @@ fun CustomInputField(
             modifier = Modifier
         )
         OutlinedTextField(
-            value = state.value,
-            onValueChange = {
-                state.value = it
-                onValueChange(it)
-            },
+            value = value,
+            onValueChange = { onValueChange(it) },
             isError = errorState.value,
             visualTransformation = if (isPasswordField && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
             colors = TextFieldDefaults.colors(
@@ -73,9 +70,13 @@ fun CustomInputField(
             placeholder = { Text(text = placeholder) },
             trailingIcon = {
                 if (isPasswordField) {
-                    val image = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                    val image =
+                        if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Icon(imageVector = image, contentDescription = if (passwordVisible) "Hide password" else "Show password")
+                        Icon(
+                            imageVector = image,
+                            contentDescription = if (passwordVisible) "Hide password" else "Show password"
+                        )
                     }
                 }
             },
