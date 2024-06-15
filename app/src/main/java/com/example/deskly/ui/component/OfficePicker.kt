@@ -32,7 +32,7 @@ fun OfficePicker(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedOfficeId by remember { mutableStateOf("") }
+    var selectedOfficeName by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier
@@ -45,10 +45,10 @@ fun OfficePicker(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = (if (selectedOfficeId.isEmpty()) {
+            text = (if (selectedOfficeName.isEmpty()) {
                 "Select Office"
             } else {
-                offices.find { it.id == selectedOfficeId }?.name ?: ""
+                offices.find { it.name == selectedOfficeName }?.name ?: ""
             }),
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
@@ -62,7 +62,7 @@ fun OfficePicker(
                 DropdownMenuItem(
                     text = { Text(text = office.name) },
                     onClick = {
-                        selectedOfficeId = office.id
+                        selectedOfficeName = office.name
                         expanded = false
                     }
                 )

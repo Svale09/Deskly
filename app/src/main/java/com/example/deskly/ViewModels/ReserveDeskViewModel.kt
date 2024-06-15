@@ -40,8 +40,8 @@ class ReserveDeskViewModel : ViewModel() {
         _isReserveButtonEnabled.value = _desks.value.any { it.id == deskId }
     }
 
-    fun setOffice(officeId: String) {
-        val selected = _offices.value.find { it.id == officeId }
+    fun setOffice(officeName: String) {
+        val selected = _offices.value.find { it.name == officeName }
         _selectedOffice.value = selected
         selected?.let { loadDesksForOffice(it) }
     }
