@@ -19,7 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.deskly.ui.theme.primaryBlue
@@ -29,7 +28,8 @@ import java.util.Locale
 
 @Composable
 fun DatePicker(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onDateSelected: (String) -> Unit
 ) {
     var selectedDate by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -42,6 +42,7 @@ fun DatePicker(
                 set(year, month, dayOfMonth)
             }
             selectedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selectedCalendar.time)
+            onDateSelected(selectedDate)
         },
         calendar.get(Calendar.YEAR),
         calendar.get(Calendar.MONTH),
@@ -69,8 +70,8 @@ fun DatePicker(
     }
 }
 
-@Preview
-@Composable
-fun DatePickerPreview() {
-    DatePicker()
-}
+//@Preview
+//@Composable
+//fun DatePickerPreview() {
+//    DatePicker()
+//}

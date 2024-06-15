@@ -54,6 +54,7 @@ fun ReserveDeskScreen(
 ) {
     val offices by viewModel.offices.collectAsState()
     val desks by viewModel.desks.collectAsState()
+    var selectedDate by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         viewModel.desks.collect {
@@ -132,7 +133,7 @@ fun ReserveDeskScreen(
                         OfficePicker(offices = offices, {
                             viewModel.loadDesksForOffice(it)
                         })
-                        DatePicker()
+                        DatePicker(onDateSelected = {selectedDate = it})
                     }
                     DeskGrid(
                         desks = desks,
