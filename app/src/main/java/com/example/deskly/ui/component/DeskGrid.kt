@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.deskly.Models.Desk
 import com.example.deskly.Models.mockDesks
 import com.example.deskly.ViewModels.ReserveDeskViewModel
@@ -20,7 +19,7 @@ fun DeskGrid(
     desks: List<Desk>,
     date: String,
     modifier: Modifier = Modifier,
-    viewModel: ReserveDeskViewModel = viewModel()
+    viewModel: ReserveDeskViewModel
 ) {
     val selectedDeskId by viewModel.selectedDeskId.collectAsState()
 
@@ -46,5 +45,5 @@ fun DeskGrid(
 @Preview
 @Composable
 private fun DeskGridPreview() {
-    DeskGrid(desks = mockDesks, date = "14/06/2024", modifier = Modifier)
+    DeskGrid(desks = mockDesks, date = "14/06/2024", modifier = Modifier, ReserveDeskViewModel())
 }
