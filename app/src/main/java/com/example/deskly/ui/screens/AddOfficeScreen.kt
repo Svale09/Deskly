@@ -3,11 +3,14 @@ package com.example.deskly.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -28,7 +31,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.deskly.Models.Desk
 import com.example.deskly.R
+import com.example.deskly.ViewModels.AddOfficeViewModel
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.CustomInputField
@@ -42,8 +47,10 @@ fun AddOfficeScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     onLogOutClick: () -> Unit,
+    addOfficeViewModel: AddOfficeViewModel
 ) {
     var inputOfficeName by remember { mutableStateOf("") }
+
 
     val items = listOf(
         BottomNavigationItem(
@@ -111,7 +118,13 @@ fun AddOfficeScreen(
                         value = "",
                         onValueChange = { newOfficeName -> inputOfficeName = newOfficeName }
                     )
-                    //TODO create a function for displaying the desk grid
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(4),
+                        contentPadding = PaddingValues(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                    ) {
+
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Column(
@@ -128,7 +141,15 @@ fun AddOfficeScreen(
                         IconAndLabelButton(
                             title = "Add desk",
                             vector = ImageVector.vectorResource(id = R.drawable.add_desk),
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                addOfficeViewModel.addDesk(
+                                    Desk(
+                                        id = 0,
+                                        officeId = inputOfficeName,
+                                        reservedDates = emptyList()
+                                    )
+                                )
+                            },
                             color = primaryBlue
                         )
                         IconAndLabelButton(
@@ -159,7 +180,8 @@ private fun PreviewAddOfficeScreen() {
     val mockNavController = rememberNavController()
     AddOfficeScreen(
         navController = mockNavController,
-        onLogOutClick = {}
+        onLogOutClick = {},
+        addOfficeViewModel = AddOfficeViewModel()
     )
 }
 
