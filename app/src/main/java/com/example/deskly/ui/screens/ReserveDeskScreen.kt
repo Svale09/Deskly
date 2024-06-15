@@ -26,11 +26,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.deskly.Models.mockDesks
 import com.example.deskly.Models.mockOffices
 import com.example.deskly.R
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.DatePicker
+import com.example.deskly.ui.component.DeskGrid
 import com.example.deskly.ui.component.OfficePicker
 
 data class BottomNavigationItem(
@@ -122,7 +124,11 @@ fun ReserveDeskScreen(
                         OfficePicker(offices = mockOffices)
                         DatePicker()
                     }
-                    //TODO create a function for displaying the desk grid
+                    DeskGrid(
+                        desks = mockDesks,
+                        date = "14/06/2024",
+                        modifier = Modifier.padding(vertical = 40.dp)
+                    )
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 CustomButton(

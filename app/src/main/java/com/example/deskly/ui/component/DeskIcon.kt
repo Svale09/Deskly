@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -28,13 +29,12 @@ import com.example.deskly.ui.theme.primaryRed
 fun DeskItem(
     isReserved: Boolean
 ) {
-    var backgroundColor by remember { mutableStateOf(if (isReserved) primaryRed else Color.Transparent) }
+    var backgroundColor by remember { mutableStateOf(if (isReserved) primaryRed.copy(alpha = 0.8f) else Color.Transparent) }
 
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .height(48.dp)
-            .width(48.dp)
+            .padding(8.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(backgroundColor)
             .let {
@@ -43,7 +43,9 @@ fun DeskItem(
                 } else {
                     it.clickable {
                         backgroundColor =
-                            if (backgroundColor == primaryBlue) Color.Transparent else primaryBlue
+                            if (backgroundColor == primaryBlue.copy(alpha = 0.5f)) Color.Transparent else primaryBlue.copy(
+                                alpha = 0.5f
+                            )
                     }
                 }
             }
@@ -53,8 +55,8 @@ fun DeskItem(
             contentDescription = null,
             //tint = if (isReserved) Color.Gray else MaterialTheme.colorScheme.primary, // Change icon color if needed
             modifier = Modifier
-                .width(30.dp)
-                .height(30.dp)
+                .width(50.dp)
+                .height(50.dp)
         )
     }
 }
