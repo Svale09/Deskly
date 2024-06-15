@@ -123,10 +123,12 @@ fun AddOfficeScreen(
                         onValueChange = { newOfficeName -> inputOfficeName = newOfficeName }
                     )
                     LazyVerticalGrid(
-                        modifier = Modifier.height(380.dp),
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .height(370.dp),
                         columns = GridCells.Fixed(4),
                         contentPadding = PaddingValues(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                        verticalArrangement = Arrangement.spacedBy(15.dp),
                     ) {
                         items(desks.size) {
                             DeskItem(isReserved = false, isSelected = false, onClick = {})
