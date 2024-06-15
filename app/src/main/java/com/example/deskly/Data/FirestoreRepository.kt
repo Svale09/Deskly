@@ -75,4 +75,28 @@ class FirestoreRepository {
                 Log.w(TAG, "Error adding office", e)
             }
     }
+
+    suspend fun fetchOffices(): List<Office> {
+        return try {
+            // Query the "offices" collection
+            val querySnapshot = db.collection("offices").get().await()
+
+            // Map the documents to Office objects
+            querySnapshot.documents.map { document ->
+                val name = document.getString("name") ?: ""
+                val desks = (document.get("desks") as? List<Map<String, Any>>)?.map { deskData ->
+                    Desk(
+                        id = (deskData["id"] as Long).toInt(),
+                        officeId = deskData["officeId"] as String,
+                        reservedDates = deskData["reservedDates"] as List<String>
+                    )
+                } ?: emptyList()
+                Office(name = name, desks = desks)
+            }
+        } catch (e: Exception) {
+            // Handle the exception
+            e.printStackTrace()
+            emptyList()
+        }
+    }
 }

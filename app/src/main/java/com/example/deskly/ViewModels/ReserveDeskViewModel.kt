@@ -1,13 +1,18 @@
 package com.example.deskly.ViewModels
 
 import androidx.lifecycle.ViewModel
+import com.example.deskly.Data.FirestoreRepository
 import com.example.deskly.Models.Desk
 import com.example.deskly.Models.Office
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class ReserveDeskViewModel : ViewModel() {
+    private val firestoreRepository = FirestoreRepository()
 
     private val _offices = MutableStateFlow<List<Office>>(emptyList())
     val offices: StateFlow<List<Office>> get() = _offices
@@ -28,7 +33,9 @@ class ReserveDeskViewModel : ViewModel() {
     val selectedDeskId: StateFlow<Int?> get() = _selectedDeskId
 
     fun loadOffices(offices: List<Office>) {
-        _offices.value = offices
+        CoroutineScope(Dispatchers.IO).launch {
+            _offices.value = firestoreRepository.fetchOffices()
+        }
     }
 
     fun loadDesksForOffice(office: Office) {
