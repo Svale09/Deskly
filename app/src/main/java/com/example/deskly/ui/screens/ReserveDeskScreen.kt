@@ -54,7 +54,10 @@ fun ReserveDeskScreen(
 ) {
     val offices by viewModel.offices.collectAsState()
     val desks by viewModel.desks.collectAsState()
+
     var selectedDate by rememberSaveable { mutableStateOf("") }
+    var selectedOffice by rememberSaveable { mutableStateOf("") }
+    var selectedDesk by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         viewModel.desks.collect {
@@ -133,6 +136,7 @@ fun ReserveDeskScreen(
                         OfficePicker(offices = offices, {
                             viewModel.loadDesksForOffice(it)
                             viewModel.clearSelectedDesk()
+                            selectedOffice = it
                         })
                         DatePicker(onDateSelected = {
                             selectedDate = it
@@ -149,7 +153,15 @@ fun ReserveDeskScreen(
                 Spacer(modifier = Modifier.weight(1f))
                 CustomButton(
                     text = "Reserve a desk",
-                    onClick = { viewModel.reserveDesk() },
+                    onClick = {
+                        viewModel.selectedDeskId.value?.let {
+                            viewModel.reserveDesk(
+                                deskId = it,
+                                date = selectedDate,
+                                officeName = selectedOffice
+                            )
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 50.dp)

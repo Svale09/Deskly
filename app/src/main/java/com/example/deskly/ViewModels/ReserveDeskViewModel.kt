@@ -27,7 +27,6 @@ class ReserveDeskViewModel : ViewModel() {
     val selectedDate: StateFlow<String> get() = _selectedDate
 
     private val _isReserveButtonEnabled = MutableStateFlow(false)
-    val isReserveButtonEnabled: StateFlow<Boolean> get() = _isReserveButtonEnabled
 
     private val _selectedDeskId = MutableStateFlow<Int?>(null)
     val selectedDeskId: StateFlow<Int?> get() = _selectedDeskId
@@ -57,17 +56,9 @@ class ReserveDeskViewModel : ViewModel() {
         _isReserveButtonEnabled.value = _desks.value.any { it.id == deskId }
     }
 
-    fun setOffice(officeName: String) {
-        val selected = _offices.value.find { it.name == officeName }
-        _selectedOffice.value = selected
-        selected?.let { loadDesksForOffice(it.name) }
-    }
-
-    fun setDate(date: String) {
-        _selectedDate.value = date
-    }
-
-    fun reserveDesk() {
-        // Handle the reservation logic
+    fun reserveDesk(officeName: String, deskId: Int, date: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            firestoreRepository.reserveDesk(officeName, deskId.toInt(), date)
+        }
     }
 }

@@ -4,6 +4,9 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.deskly.Models.Desk
 import com.example.deskly.Models.Office
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.getField
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -97,6 +100,29 @@ class FirestoreRepository {
             // Handle the exception
             e.printStackTrace()
             emptyList()
+        }
+    }
+
+    suspend fun reserveDesk(officeName: String, deskId: Int, date: String) {
+        try {
+            // Query the "offices" collection where the "name" field matches the provided officeName
+            val querySnapshot = db.collection("offices")
+                .get()
+                .await()
+
+            val officePathSnapshot = querySnapshot.documents.first {
+                it.getField<String>("name") == officeName
+            }
+
+            db.collection("offices").document(officePathSnapshot.id)
+                .update(
+                    FieldPath.of("desks", "${deskId - 1}", "reservedDates"),
+                    FieldValue.arrayUnion(date)
+                )
+
+        } catch (e: Exception) {
+            // Handle the exception
+            e.printStackTrace()
         }
     }
 }
