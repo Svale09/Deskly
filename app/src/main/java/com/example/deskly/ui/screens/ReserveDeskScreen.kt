@@ -1,5 +1,6 @@
 package com.example.deskly.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -23,11 +26,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.deskly.Models.mockDesks
-import com.example.deskly.Models.mockOffices
 import com.example.deskly.R
 import com.example.deskly.ViewModels.ReserveDeskViewModel
 import com.example.deskly.ui.component.CustomAppBar
@@ -50,9 +50,16 @@ fun ReserveDeskScreen(
     navController: NavController,
     onLogOutClick: () -> Unit,
     userRole: Int?,
-    viewModel: ReserveDeskViewModel = viewModel()
+    viewModel: ReserveDeskViewModel
 ) {
-    var office: String = ""
+    val offices by viewModel.offices.collectAsState()
+    val desks by viewModel.desks.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.desks.collect {
+            Log.d("desks", it.toString())
+        }
+    }
 
     val items = listOf(
         BottomNavigationItem(
@@ -122,11 +129,13 @@ fun ReserveDeskScreen(
                             .padding(top = 10.dp),
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
-                        OfficePicker(offices = mockOffices)
+                        OfficePicker(offices = offices, {
+                            viewModel.loadDesksForOffice(it)
+                        })
                         DatePicker()
                     }
                     DeskGrid(
-                        desks = mockDesks,
+                        desks = desks,
                         date = "14/06/2024",
                         modifier = Modifier.padding(vertical = 40.dp),
                         viewModel = viewModel
@@ -154,6 +163,7 @@ private fun PreviewReserveDeskScreen() {
         onDeskSelected = {},
         onLogOutClick = {},
         navController = mockNavController,
-        userRole = 0
+        userRole = 0,
+        viewModel = ReserveDeskViewModel()
     )
 }

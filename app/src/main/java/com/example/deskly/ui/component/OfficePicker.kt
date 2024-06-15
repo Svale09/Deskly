@@ -29,6 +29,7 @@ import com.example.deskly.Models.mockOffices
 @Composable
 fun OfficePicker(
     offices: List<Office>,
+    onOfficeSelected: (officeName: String) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -64,6 +65,7 @@ fun OfficePicker(
                     onClick = {
                         selectedOfficeName = office.name
                         expanded = false
+                        onOfficeSelected(office.name)
                     }
                 )
             }

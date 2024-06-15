@@ -32,14 +32,20 @@ class ReserveDeskViewModel : ViewModel() {
     private val _selectedDeskId = MutableStateFlow<Int?>(null)
     val selectedDeskId: StateFlow<Int?> get() = _selectedDeskId
 
-    fun loadOffices(offices: List<Office>) {
+    init {
+        loadOffices()
+    }
+
+    fun loadOffices() {
         CoroutineScope(Dispatchers.IO).launch {
             _offices.value = firestoreRepository.fetchOffices()
         }
     }
 
-    fun loadDesksForOffice(office: Office) {
-        // Load desks logic here
+    fun loadDesksForOffice(officeName: String) {
+        _offices.value.find { it.name == officeName }?.let { office ->
+            _desks.value = office.desks
+        }
     }
 
     fun selectDesk(deskId: Int) {
@@ -50,7 +56,7 @@ class ReserveDeskViewModel : ViewModel() {
     fun setOffice(officeName: String) {
         val selected = _offices.value.find { it.name == officeName }
         _selectedOffice.value = selected
-        selected?.let { loadDesksForOffice(it) }
+        selected?.let { loadDesksForOffice(it.name) }
     }
 
     fun setDate(date: String) {

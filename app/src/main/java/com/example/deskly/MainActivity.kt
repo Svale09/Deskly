@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.deskly.ViewModels.AddOfficeViewModel
 import com.example.deskly.ViewModels.AuthenticationViewModel
+import com.example.deskly.ViewModels.ReserveDeskViewModel
 import com.example.deskly.ui.screens.AddOfficeScreen
 import com.example.deskly.ui.screens.HomeScreen
 import com.example.deskly.ui.screens.LoginScreen
@@ -66,7 +67,8 @@ class MainActivity : ComponentActivity() {
                                     popUpTo(route = "home_screen") { inclusive = true }
                                 }
                             },
-                            userRole = sharedPrefsManager.getUserRole()
+                            userRole = sharedPrefsManager.getUserRole(),
+                            viewModel = ReserveDeskViewModel()
                         )
                     }
                     composable(route = "add_office") {
