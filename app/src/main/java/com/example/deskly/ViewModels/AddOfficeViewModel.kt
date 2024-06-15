@@ -9,18 +9,18 @@ import kotlinx.coroutines.flow.StateFlow
 class AddOfficeViewModel: ViewModel() {
     private val _desks = MutableStateFlow<List<Desk>>(emptyList())
     val desks: StateFlow<List<Desk>> get() = _desks
-    private var currentDeskId = 0
 
     fun addOffice(office: Office, desks: List<Desk>) {
         //TODO Add office to database
     }
 
     fun addDesk(desk: Desk) {
-        _desks.value += desk.copy(id = currentDeskId)
-        currentDeskId++
+        _desks.value += desk
     }
 
     fun removeDesk(){
-        _desks.value = _desks.value.dropLast(1) //removes the last desk in the list
+        if (_desks.value.isNotEmpty()) {
+            _desks.value = _desks.value.dropLast(1)
+        }
     }
 }

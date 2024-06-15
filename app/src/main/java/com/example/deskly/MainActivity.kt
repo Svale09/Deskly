@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.deskly.ViewModels.AddOfficeViewModel
 import com.example.deskly.ViewModels.AuthenticationViewModel
 import com.example.deskly.ui.screens.AddOfficeScreen
 import com.example.deskly.ui.screens.HomeScreen
@@ -77,6 +78,7 @@ class MainActivity : ComponentActivity() {
                                     popUpTo(route = "home_screen") { inclusive = true }
                                 }
                             },
+                            addOfficeViewModel = AddOfficeViewModel()
                         )
                     }
                 }

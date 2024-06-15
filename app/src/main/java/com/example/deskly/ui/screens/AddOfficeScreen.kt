@@ -17,6 +17,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +38,7 @@ import com.example.deskly.ViewModels.AddOfficeViewModel
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.CustomInputField
+import com.example.deskly.ui.component.DeskItem
 import com.example.deskly.ui.component.IconAndLabelButton
 import com.example.deskly.ui.theme.primaryBlue
 import com.example.deskly.ui.theme.primaryRed
@@ -50,6 +52,7 @@ fun AddOfficeScreen(
     addOfficeViewModel: AddOfficeViewModel
 ) {
     var inputOfficeName by remember { mutableStateOf("") }
+    val desks by addOfficeViewModel.desks.collectAsState()
 
 
     val items = listOf(
@@ -123,7 +126,9 @@ fun AddOfficeScreen(
                         contentPadding = PaddingValues(8.dp),
                         verticalArrangement = Arrangement.spacedBy(20.dp),
                     ) {
-
+                        items(desks.size){
+                            DeskItem(isReserved = false, isSelected = false, onClick = {})
+                        }
                     }
                 }
                 Spacer(modifier = Modifier.weight(1f))
@@ -144,7 +149,7 @@ fun AddOfficeScreen(
                             onClick = {
                                 addOfficeViewModel.addDesk(
                                     Desk(
-                                        id = 0,
+                                        id = desks.size + 1,
                                         officeId = inputOfficeName,
                                         reservedDates = emptyList()
                                     )
@@ -155,7 +160,7 @@ fun AddOfficeScreen(
                         IconAndLabelButton(
                             title = "Remove desk",
                             vector = ImageVector.vectorResource(id = R.drawable.remove_desk),
-                            onClick = { /*TODO*/ },
+                            onClick = { addOfficeViewModel.removeDesk() },
                             color = primaryRed
                         )
                     }
