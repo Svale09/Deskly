@@ -22,7 +22,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -52,7 +51,7 @@ fun AddOfficeScreen(
     onLogOutClick: () -> Unit,
     addOfficeViewModel: AddOfficeViewModel
 ) {
-    var inputOfficeName by remember { mutableStateOf("") }
+    var inputOfficeName by rememberSaveable { mutableStateOf("") }
     val desks by addOfficeViewModel.desks.collectAsState()
 
 
@@ -165,15 +164,17 @@ fun AddOfficeScreen(
                             title = "Remove desk",
                             vector = ImageVector.vectorResource(id = R.drawable.remove_desk),
                             onClick = {
-                                addOfficeViewModel.removeDesk();
-                                inputOfficeName = ""
+                                addOfficeViewModel.removeDesk()
                             },
                             color = primaryRed
                         )
                     }
                     CustomButton(
                         text = "Save office",
-                        onClick = { addOfficeViewModel.addOffice(inputOfficeName) },
+                        onClick = {
+                            addOfficeViewModel.addOffice(inputOfficeName);
+                            inputOfficeName = ""
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 50.dp)
