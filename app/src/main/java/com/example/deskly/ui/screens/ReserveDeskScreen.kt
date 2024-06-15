@@ -1,6 +1,5 @@
 package com.example.deskly.ui.screens
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,11 +23,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.deskly.Models.mockDesks
 import com.example.deskly.Models.mockOffices
 import com.example.deskly.R
+import com.example.deskly.ViewModels.ReserveDeskViewModel
 import com.example.deskly.ui.component.CustomAppBar
 import com.example.deskly.ui.component.CustomButton
 import com.example.deskly.ui.component.DatePicker
@@ -42,14 +43,14 @@ data class BottomNavigationItem(
     val route: String
 )
 
-
 @Composable
 fun ReserveDeskScreen(
     onDeskSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
     navController: NavController,
     onLogOutClick: () -> Unit,
-    userRole: Int?
+    userRole: Int?,
+    viewModel: ReserveDeskViewModel = viewModel()
 ) {
     var office: String = ""
 
@@ -127,13 +128,14 @@ fun ReserveDeskScreen(
                     DeskGrid(
                         desks = mockDesks,
                         date = "14/06/2024",
-                        modifier = Modifier.padding(vertical = 40.dp)
+                        modifier = Modifier.padding(vertical = 40.dp),
+                        viewModel = viewModel
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 CustomButton(
                     text = "Reserve a desk",
-                    onClick = { /*TODO*/ },
+                    onClick = { viewModel.reserveDesk() },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 50.dp)
@@ -143,7 +145,6 @@ fun ReserveDeskScreen(
         }
     }
 }
-
 
 @Preview
 @Composable
@@ -156,4 +157,3 @@ private fun PreviewReserveDeskScreen() {
         userRole = 0
     )
 }
-

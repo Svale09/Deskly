@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,9 +23,15 @@ import com.example.deskly.ui.theme.primaryRed
 
 @Composable
 fun DeskItem(
-    isReserved: Boolean
+    isReserved: Boolean,
+    isSelected: Boolean,
+    onClick: () -> Unit
 ) {
-    var backgroundColor by remember { mutableStateOf(if (isReserved) primaryRed.copy(alpha = 0.8f) else Color.Transparent) }
+    val backgroundColor = when {
+        isReserved -> primaryRed.copy(alpha = 0.8f)
+        isSelected -> primaryBlue.copy(alpha = 0.5f)
+        else -> Color.Transparent
+    }
 
     Box(
         contentAlignment = Alignment.Center,
@@ -37,23 +39,11 @@ fun DeskItem(
             .padding(8.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(backgroundColor)
-            .let {
-                if (isReserved) {
-                    it
-                } else {
-                    it.clickable {
-                        backgroundColor =
-                            if (backgroundColor == primaryBlue.copy(alpha = 0.5f)) Color.Transparent else primaryBlue.copy(
-                                alpha = 0.5f
-                            )
-                    }
-                }
-            }
+            .clickable(onClick = onClick, enabled = !isReserved)
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.desk),
             contentDescription = null,
-            //tint = if (isReserved) Color.Gray else MaterialTheme.colorScheme.primary, // Change icon color if needed
             modifier = Modifier
                 .width(50.dp)
                 .height(50.dp)
@@ -64,5 +54,5 @@ fun DeskItem(
 @Preview
 @Composable
 fun DeskIconPreview() {
-    DeskItem(isReserved = false)
+    DeskItem(isReserved = false, isSelected = false, onClick = {})
 }
