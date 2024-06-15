@@ -42,6 +42,10 @@ class ReserveDeskViewModel : ViewModel() {
         }
     }
 
+    fun clearSelectedDesk(){
+        _selectedDeskId.update { null }
+    }
+
     fun loadDesksForOffice(officeName: String) {
         _offices.value.find { it.name == officeName }?.let { office ->
             _desks.value = office.desks

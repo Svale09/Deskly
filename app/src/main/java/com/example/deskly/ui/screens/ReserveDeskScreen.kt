@@ -132,12 +132,16 @@ fun ReserveDeskScreen(
                     ) {
                         OfficePicker(offices = offices, {
                             viewModel.loadDesksForOffice(it)
+                            viewModel.clearSelectedDesk()
                         })
-                        DatePicker(onDateSelected = {selectedDate = it})
+                        DatePicker(onDateSelected = {
+                            selectedDate = it
+                            viewModel.clearSelectedDesk()
+                        })
                     }
                     DeskGrid(
                         desks = desks,
-                        date = "14/06/2024",
+                        date = selectedDate,
                         modifier = Modifier.padding(vertical = 40.dp),
                         viewModel = viewModel
                     )
