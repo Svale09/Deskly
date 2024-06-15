@@ -164,13 +164,16 @@ fun AddOfficeScreen(
                         IconAndLabelButton(
                             title = "Remove desk",
                             vector = ImageVector.vectorResource(id = R.drawable.remove_desk),
-                            onClick = { addOfficeViewModel.removeDesk() },
+                            onClick = {
+                                addOfficeViewModel.removeDesk();
+                                inputOfficeName = ""
+                            },
                             color = primaryRed
                         )
                     }
                     CustomButton(
                         text = "Save office",
-                        onClick = { /*TODO*/ },
+                        onClick = { addOfficeViewModel.addOffice(inputOfficeName) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 50.dp)

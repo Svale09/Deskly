@@ -2,12 +2,14 @@ package com.example.deskly.Data
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.deskly.Models.Desk
+import com.example.deskly.Models.Office
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 class FirestoreRepository {
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     fun addNewUser(email: String, role: Int) {
         val user = hashMapOf(
@@ -48,5 +50,29 @@ class FirestoreRepository {
             e.printStackTrace()
             null
         }
+    }
+
+    fun addOffice(office: Office, desks: List<Desk>, onSuccess: () -> Unit) {
+        val officeData = hashMapOf(
+            "name" to office.name,
+            "desks" to desks.map { desk ->
+                hashMapOf(
+                    "id" to desk.id,
+                    "officeId" to desk.officeId,
+                    "isReserved" to desk.isReserved,
+                    "reservedDates" to desk.reservedDates
+                )
+            }
+        )
+
+        db.collection("offices")
+            .add(officeData)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "Office added with ID: ${documentReference.id}")
+                onSuccess()
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding office", e)
+            }
     }
 }
