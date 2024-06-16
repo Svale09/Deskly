@@ -25,19 +25,19 @@ import com.example.deskly.ui.screens.ReserveDeskScreen
 import com.example.deskly.ui.screens.SignUpScreen
 import com.example.deskly.ui.theme.DesklyTheme
 import com.example.deskly.utils.SharedPrefsManager
-import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 mainViewModel.isLoading.value
             }
         }
-        FirebaseApp.initializeApp(this)
+
         setContent {
             DesklyTheme {
                 val sharedPrefsManager = SharedPrefsManager.getInstance(this)
