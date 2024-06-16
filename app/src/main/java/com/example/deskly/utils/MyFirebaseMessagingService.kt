@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.deskly.MainActivity
 import com.example.deskly.R
@@ -13,6 +14,12 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onNewToken(token: String) {
+        Log.d("FCM", "Refreshed token: $token")
+
+        //sendRegistrationToServer(token)
+    }
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // Handle FCM messages here
         remoteMessage.notification?.let {

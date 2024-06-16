@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.preference)
     implementation(libs.firebase.messaging)
+    implementation(libs.splashscreen)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

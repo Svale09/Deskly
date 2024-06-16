@@ -9,6 +9,7 @@ import com.example.deskly.Data.FirestoreRepository
 import com.example.deskly.utils.SharedPrefsManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -32,6 +33,10 @@ class AuthenticationViewModel(context: Context) : ViewModel() {
                 _loginState.postValue(result.user)
                 val userRole: Int = firestoreRepository.fetchUserRoleByEmail(email)!!
                 sharedPrefsManager.saveUserRole(userRole)
+
+                if (userRole == 0) {
+                    FirebaseMessaging.getInstance().subscribeToTopic("admin")
+                }
 
             } catch (e: Exception) {
                 _loginState.postValue(null)

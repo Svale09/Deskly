@@ -17,6 +17,7 @@ accompanist = "0.32.0"
 material3Android = "1.2.1"
 preference = "1.2.1"
 firebaseMessaging = "24.0.0"
+core-splashscreen = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,7 @@ accompanist-drawablepainter = { group = "com.google.accompanist", name = "accomp
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 preference = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
