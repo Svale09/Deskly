@@ -3,6 +3,7 @@ package com.example.deskly
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.deskly.ViewModels.AddOfficeViewModel
 import com.example.deskly.ViewModels.AuthenticationViewModel
+import com.example.deskly.ViewModels.MainViewModel
 import com.example.deskly.ViewModels.ReserveDeskViewModel
 import com.example.deskly.ui.screens.AddOfficeScreen
 import com.example.deskly.ui.screens.HomeScreen
@@ -26,10 +28,15 @@ import com.example.deskly.utils.SharedPrefsManager
 import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                mainViewModel.isLoading.value
+            }
+        }
         FirebaseApp.initializeApp(this)
         setContent {
             DesklyTheme {
