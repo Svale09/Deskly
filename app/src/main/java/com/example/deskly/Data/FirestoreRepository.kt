@@ -144,7 +144,6 @@ class FirestoreRepository {
                     id == deskId
                 }
 
-                val y = deskIndex
                 if (deskIndex != -1) {
                     val desk = desks[deskIndex].toMutableMap()
                     val reservedDates = desk["reservedDates"] as? List<String> ?: emptyList()
