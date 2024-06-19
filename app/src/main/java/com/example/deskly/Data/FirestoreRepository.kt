@@ -59,7 +59,6 @@ class FirestoreRepository {
                 hashMapOf(
                     "id" to desk.id,
                     "officeId" to desk.officeId,
-                    "isReserved" to desk.isReserved,
                     "reservedDates" to desk.reservedDates
                 )
             }

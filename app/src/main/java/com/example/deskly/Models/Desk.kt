@@ -4,8 +4,6 @@ data class Desk(
     val id: Int,
     val officeId: String,
     val reservedDates: List<String>,
-    val isReserved: Boolean = false,
-    val isSelected: Boolean = false
 )
 
 val mockDesks = listOf(
