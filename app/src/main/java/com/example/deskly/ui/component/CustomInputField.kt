@@ -12,8 +12,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,15 +55,12 @@ fun CustomInputField(
             onValueChange = { onValueChange(it) },
             isError = errorState,
             visualTransformation = if (isPasswordField && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
-            colors = TextFieldDefaults.colors(
+            colors = OutlinedTextFieldDefaults.colors(
+                errorContainerColor = Color.Red.copy(alpha = 0.3f),
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
                 unfocusedPlaceholderColor = Color.LightGray,
                 focusedPlaceholderColor = Color.LightGray,
-                errorContainerColor = Color.Red.copy(alpha = 0.2f),
-                errorPlaceholderColor = Color.Red.copy(alpha = 0.2f),
             ),
             placeholder = { Text(text = placeholder) },
             trailingIcon = {

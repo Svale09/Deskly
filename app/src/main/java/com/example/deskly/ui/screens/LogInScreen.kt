@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -79,6 +80,14 @@ fun LoginScreen(
                     isPasswordField = true,
                     modifier = Modifier.padding(top = 20.dp),
                     errorState = it
+                )
+            }
+
+            if (errorState == true) {
+                Text(
+                    text = "Incorrect email or password",
+                    color = Color.Red.copy(alpha = 0.7f),
+                    modifier = Modifier.padding(top = 10.dp)
                 )
             }
 
