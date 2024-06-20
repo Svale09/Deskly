@@ -40,6 +40,7 @@ class AuthenticationViewModel(context: Context) : ViewModel() {
                 _loginState.postValue(result.user)
                 val userRole: Int = firestoreRepository.fetchUserRoleByEmail(email)!!
                 sharedPrefsManager.saveUserRole(userRole)
+                _errorState.postValue(false)
 
                 if (userRole == 0) {
                     FirebaseMessaging.getInstance().subscribeToTopic("admin")
