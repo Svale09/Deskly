@@ -32,6 +32,7 @@ fun LoginScreen(
     var inputPassword by remember { mutableStateOf("") }
 
     val loginState by authenticationViewModel.loginState.observeAsState()
+    val errorState by authenticationViewModel.errorState.observeAsState()
 
     // Navigate to reserve_desk screen if login is successful
     loginState?.let { user ->
@@ -58,22 +59,28 @@ fun LoginScreen(
                 fontFamily = jomhuriaFontFamily,
                 fontSize = 60.sp,
             )
-            CustomInputField(
-                label = "Email",
-                placeholder = "Enter your email",
-                value = inputEmail,
-                onValueChange = { newEmail -> inputEmail = newEmail },
-                isPasswordField = false
-            )
+            errorState?.let {
+                CustomInputField(
+                    label = "Email",
+                    placeholder = "Enter your email",
+                    value = inputEmail,
+                    onValueChange = { newEmail -> inputEmail = newEmail },
+                    isPasswordField = false,
+                    errorState = it
+                )
+            }
 
-            CustomInputField(
-                label = "Password",
-                placeholder = "Input your password",
-                value = inputPassword,
-                onValueChange = { newPassword -> inputPassword = newPassword },
-                isPasswordField = true,
-                modifier = Modifier.padding(top = 20.dp)
-            )
+            errorState?.let {
+                CustomInputField(
+                    label = "Password",
+                    placeholder = "Input your password",
+                    value = inputPassword,
+                    onValueChange = { newPassword -> inputPassword = newPassword },
+                    isPasswordField = true,
+                    modifier = Modifier.padding(top = 20.dp),
+                    errorState = it
+                )
+            }
 
             CustomButton(
                 text = "Log In",

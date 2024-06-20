@@ -119,7 +119,8 @@ fun AddOfficeScreen(
                         label = "Office name",
                         placeholder = "Input the office name",
                         value = inputOfficeName,
-                        onValueChange = { newOfficeName -> inputOfficeName = newOfficeName }
+                        onValueChange = { newOfficeName -> inputOfficeName = newOfficeName },
+                        errorState = false,
                     )
                     LazyVerticalGrid(
                         modifier = Modifier

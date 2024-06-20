@@ -23,8 +23,15 @@ class AuthenticationViewModel(context: Context) : ViewModel() {
     private val _loginState = MutableLiveData<FirebaseUser?>()
     val loginState: LiveData<FirebaseUser?> get() = _loginState
 
+    private val _errorState = MutableLiveData<Boolean?>()
+    val errorState: LiveData<Boolean?> get() = _errorState
+
     private val _signUpState = MutableLiveData<FirebaseUser?>()
     val signUpState: LiveData<FirebaseUser?> get() = _signUpState
+
+    init {
+        _errorState.postValue(false)
+    }
 
     fun logIn(email: String, password: String) {
         viewModelScope.launch {
@@ -40,6 +47,7 @@ class AuthenticationViewModel(context: Context) : ViewModel() {
 
             } catch (e: Exception) {
                 _loginState.postValue(null)
+                _errorState.postValue(true)
             }
         }
     }

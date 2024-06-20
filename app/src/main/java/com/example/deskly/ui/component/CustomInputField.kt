@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.deskly.ui.theme.jomhuriaFontFamily
-import com.example.deskly.ui.theme.primaryRed
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,9 +37,9 @@ fun CustomInputField(
     value: String,
     onValueChange: (String) -> Unit,
     isPasswordField: Boolean = false,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    errorState: Boolean
 ) {
-    val errorState = remember { mutableStateOf(false) }
     //val state = remember { mutableStateOf(value) }
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -54,7 +53,7 @@ fun CustomInputField(
         OutlinedTextField(
             value = value,
             onValueChange = { onValueChange(it) },
-            isError = errorState.value,
+            isError = errorState,
             visualTransformation = if (isPasswordField && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White,
@@ -63,9 +62,8 @@ fun CustomInputField(
                 unfocusedIndicatorColor = Color.Transparent,
                 unfocusedPlaceholderColor = Color.LightGray,
                 focusedPlaceholderColor = Color.LightGray,
-                errorContainerColor = primaryRed,
-                errorIndicatorColor = primaryRed,
-                errorPlaceholderColor = primaryRed,
+                errorContainerColor = Color.Red.copy(alpha = 0.2f),
+                errorPlaceholderColor = Color.Red.copy(alpha = 0.2f),
             ),
             placeholder = { Text(text = placeholder) },
             trailingIcon = {
@@ -98,20 +96,7 @@ private fun CustomInputFieldPreview() {
         label = "Email",
         placeholder = "Input your email",
         value = input,
-        onValueChange = { newInput -> input = newInput }
-    )
-}
-
-@Preview
-@Composable
-private fun CustomPasswordInputFieldPreview() {
-    var input: String
-    input = ""
-    CustomInputField(
-        label = "Password",
-        placeholder = "Input your password",
-        value = input,
         onValueChange = { newInput -> input = newInput },
-        isPasswordField = true
+        errorState = false
     )
 }
