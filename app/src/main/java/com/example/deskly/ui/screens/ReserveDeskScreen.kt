@@ -1,6 +1,7 @@
 package com.example.deskly.ui.screens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -160,6 +161,11 @@ fun ReserveDeskScreen(
                                 date = selectedDate,
                                 officeName = selectedOffice
                             )
+                            Toast.makeText(
+                                navController.context,
+                                "Desk reserved",
+                                Toast.LENGTH_LONG,
+                            ).show()
                         }
                     },
                     modifier = Modifier
