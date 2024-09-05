@@ -75,6 +75,39 @@ class FirestoreRepository {
             }
     }
 
+    suspend fun fetchDesksForOffice(officeName: String): List<Desk> {
+        return try {
+            // Query the "offices" collection where the "name" field matches the provided officeName
+            val querySnapshot = db.collection("offices")
+                .whereEqualTo("name", officeName)
+                .get()
+                .await()
+
+            // Check if any documents are returned
+            if (querySnapshot.documents.isNotEmpty()) {
+                // Get the first document (assuming office names are unique)
+                val document = querySnapshot.documents[0]
+
+                // Retrieve and map the desks data
+                (document.get("desks") as? List<Map<String, Any>>)?.map { deskData ->
+                    Desk(
+                        id = (deskData["id"] as Long).toInt(),
+                        officeId = deskData["officeId"] as String,
+                        reservedDates = deskData["reservedDates"] as List<String>
+                    )
+                } ?: emptyList()
+            } else {
+                // If no documents found, return an empty list
+                emptyList()
+            }
+        } catch (e: Exception) {
+            // Handle the exception
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
+
     suspend fun fetchOffices(): List<Office> {
         return try {
             // Query the "offices" collection
@@ -99,27 +132,6 @@ class FirestoreRepository {
         }
     }
 
-    //    suspend fun reserveDesk(officeName: String, deskId: Int, date: String) {
-//        try {
-//            // Query the "offices" collection where the "name" field matches the provided officeName
-//            val querySnapshot = db.collection("offices")
-//                .get()
-//                .await()
-//
-//            val officePathSnapshot = querySnapshot.documents.first {
-//                it.getField<String>("name") == officeName
-//            }
-//
-//            db.collection("offices").document(officePathSnapshot.id)
-//                .collection("desks").document().update(
-//                    deskId.toString(), ""
-//                )
-//
-//        } catch (e: Exception) {
-//            // Handle the exception
-//            e.printStackTrace()
-//        }
-//    }
     suspend fun reserveDesk(officeName: String, deskId: Int, date: String) {
         try {
             // Query the "offices" collection where the "name" field matches the provided officeName

@@ -167,6 +167,7 @@ fun ReserveDeskScreen(
                                 Toast.LENGTH_LONG,
                             ).show()
                         }
+                        viewModel.loadDesksForOffice(selectedOffice)
                     },
                     modifier = Modifier
                         .fillMaxWidth()

@@ -46,8 +46,9 @@ class ReserveDeskViewModel : ViewModel() {
     }
 
     fun loadDesksForOffice(officeName: String) {
-        _offices.value.find { it.name == officeName }?.let { office ->
-            _desks.value = office.desks
+        CoroutineScope(Dispatchers.IO).launch {
+            val desks = firestoreRepository.fetchDesksForOffice(officeName)
+            _desks.value = desks
         }
     }
 
@@ -58,7 +59,9 @@ class ReserveDeskViewModel : ViewModel() {
 
     fun reserveDesk(officeName: String, deskId: Int, date: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            firestoreRepository.reserveDesk(officeName, deskId.toInt(), date)
+            firestoreRepository.reserveDesk(officeName, deskId, date)
+            // Reload desks after reservation
+            loadDesksForOffice(officeName)
         }
     }
 }
